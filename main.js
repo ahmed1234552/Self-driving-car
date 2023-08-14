@@ -1,9 +1,13 @@
-const canvas = document.getElementById("myCanvas");
-canvas.width = 200;
+const carCanvas = document.getElementById("carCanvas");
+carCanvas.width = 200;
 
-const ctx = canvas.getContext("2d");//drawing context
-const road = new Road(canvas.width / 2, canvas.width*0.9);
-const car = new Car(road.getLaneCenter(1), 100, 30, 50,"KEYS");
+const networkCanvas = document.getElementById("networkCanvas");
+networkCanvas.width = 300;
+
+const carCtx = carCanvas.getContext("2d");//drawing context
+const networkCtx = carCanvas.getContext("2d");//drawing context
+const road = new Road(carCanvas.width / 2, carCanvas.width*0.9);
+const car = new Car(road.getLaneCenter(1), 100, 30, 50,"AI");
 const traffic = [
     new Car(road.getLaneCenter(1), -100, 30, 50,"DUMMY",2)
 ];
@@ -16,17 +20,18 @@ function animate() {
     }
     car.update(road.borders,traffic);
 
-    canvas.height = window.innerHeight;//resize canvas clear canvas too
+    carCanvas.height = window.innerHeight;//resize canvas clear canvas too
+    networkCanvas.height = window.innerHeight;//resize canvas clear canvas too
 
-    ctx.save();//save the current state of the context
-    ctx.translate(0, -car.y+canvas.height*0.7);
+    carCtx.save();//save the current state of the context
+    carCtx.translate(0, -car.y+carCanvas.height*0.7);
 
-    road.draw(ctx);
+    road.draw(carCtx);
     for (let i = 0; i < traffic.length; i++){
-        traffic[i].draw(ctx,"green");
+        traffic[i].draw(carCtx,"green");
     }
-    car.draw(ctx,"blue");
-    ctx.restore();//restore the context to the saved state
+    car.draw(carCtx,"blue");
+    carCtx.restore();//restore the context to the saved state
 
     requestAnimationFrame(animate);//call animate again many times
 }
