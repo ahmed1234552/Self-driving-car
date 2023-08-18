@@ -7,7 +7,7 @@ class Car {
 
     this.speed = 0;
     this.maxSpeed = maxSpeed;
-    this.acceleration = 0.1;
+    this.acceleration = 0.2;
     this.friction = 0.05;
     this.angle = 0;
     this.damaged = false;
@@ -93,13 +93,15 @@ class Car {
     }
     if (this.speed > this.maxSpeed) {
       this.speed = this.maxSpeed;
-    } else if (this.speed < -this.maxSpeed / 2) {
+    }
+    if (this.speed < -this.maxSpeed / 2) {
       //in case of reverse max speed is 1/2
       this.speed = -this.maxSpeed / 2; //max reverse speed"-:reverse"
     }
     if (this.speed > 0) {
       this.speed -= this.friction;
-    } else if (this.speed < 0) {
+    }
+    if (this.speed < 0) {
       this.speed += this.friction;
     }
     if (Math.abs(this.speed) < this.friction) {

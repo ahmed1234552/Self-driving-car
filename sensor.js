@@ -36,6 +36,7 @@ class Sensor {
         touches.push(touch);
       }
     }
+  
     for (let i = 0; i < traffic.length; i++) {
       const poly = traffic[i].polygon;
       for (let j = 0; j < poly.length; j++) {
@@ -50,6 +51,7 @@ class Sensor {
         }
       }
     }
+  
     if (touches.length == 0) {
       return null;
     } else {
@@ -74,7 +76,7 @@ class Sensor {
       const start = { x: this.car.x, y: this.car.y };
       const end = {
         x: this.car.x - Math.sin(rayAngle) * this.rayLength,
-        y: this.car.y - Math.cos(rayAngle) * this.rayLength,
+        y: this.car.y - Math.cos(rayAngle) * this.rayLength
       };
       this.rays.push([start, end]);
     }
@@ -94,7 +96,7 @@ class Sensor {
       ctx.moveTo(this.rays[i][0].x, this.rays[i][0].y);
       ctx.lineTo(end.x, end.y);
       ctx.stroke();
-  
+
       ctx.beginPath();
       ctx.lineWidth = 2;
       ctx.strokeStyle = "black";
